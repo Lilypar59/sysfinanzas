@@ -1,0 +1,37 @@
+.dashboard {
+  text-align: center;
+  padding: 2rem;
+  background: #f4f6f8;
+  min-height: 100vh;
+
+  h2 {
+    color: #1976d2;
+    margin-bottom: 1rem;
+  }
+
+  .modules {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .module-card {
+    width: 200px;
+    padding: 1rem;
+    text-align: center;
+    border-radius: 16px;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+
+    mat-icon {
+      font-size: 40px;
+      color: #1976d2;
+    }
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+  }
+}

@@ -1,0 +1,22 @@
+<div class="login-container">
+  <mat-card class="login-card">
+    <h2>💰 Finanzas Seguras</h2>
+    <p>Inicia sesión para acceder al panel principal</p>
+
+    <form (ngSubmit)="login()" [formGroup]="loginForm">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Correo electrónico</mat-label>
+        <input matInput formControlName="email" type="email" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Contraseña</mat-label>
+        <input matInput formControlName="password" type="password" required>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" class="full-width" type="submit">
+        Ingresar
+      </button>
+    </form>
+  </mat-card>
+</div>
