@@ -1,7 +1,7 @@
 version: "3.9"
 
 services:
-  # 🗄️ Módulo de base de datos PostgreSQL
+  #  Módulo de base de datos PostgreSQL
   db:
     build:
       context: ./datos
@@ -25,7 +25,7 @@ services:
     networks:
       - finnet
 
-  # ⚙️ Backend (FastAPI + SQLAlchemy + PostgreSQL)
+  #  Backend (FastAPI + SQLAlchemy + PostgreSQL)
   backend:
     build:
       context: ./backend
@@ -45,7 +45,7 @@ services:
     networks:
       - finnet
 
-  # 💻 Frontend (Angular + Nginx)
+  #  Frontend (Angular + Nginx)
   frontend:
     build:
       context: ./frontend
@@ -60,7 +60,7 @@ services:
     networks:
       - finnet
 
-  # 🌐 Sitio web público (React/Vite + Nginx)
+  #  Sitio web público (React/Vite + Nginx)
   site:
     build:
       context: ./sitioweb
