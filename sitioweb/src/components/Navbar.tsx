@@ -120,7 +120,7 @@ const Navbar = () => {
               >
                 Contacto
               </button>
-              <Button variant="hero" size="default" className="w-full" onClick={() => window.location.href = "/app"}>
+              <Button variant="hero" size="default" className="w-full" onClick={() => window.open("http://localhost:8081", "_blank")}>
                 Acceso Clientes
               </Button>
             </div>

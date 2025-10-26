@@ -6,17 +6,18 @@
     <form (ngSubmit)="login()" [formGroup]="loginForm">
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Correo electrónico</mat-label>
-        <input matInput formControlName="email" type="email" required>
+        <input matInput formControlName="email"  type="email" required>
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Contraseña</mat-label>
-        <input matInput formControlName="password" type="password" required>
+        <input matInput formControlName="password"  type="password" required>
       </mat-form-field>
 
       <button mat-raised-button color="primary" class="full-width" type="submit">
         Ingresar
       </button>
+      <a href="http://localhost:8080"> Regresar al website </a>
     </form>
   </mat-card>
 </div>

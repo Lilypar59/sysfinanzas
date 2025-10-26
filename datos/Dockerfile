@@ -1,12 +1,16 @@
-# ./datos/Dockerfile
-FROM postgres:16-alpine
+# # ./datos/Dockerfile
+# FROM postgres:16-alpine
 
-# Variables de entorno (puedes sobrescribirlas con .env)
+# Imagen base oficial de PostgreSQL
+FROM postgres:16
+
+# Variables de entorno por defecto (pueden sobrescribirse desde docker-compose)
 ENV POSTGRES_USER=finuser
 ENV POSTGRES_PASSWORD=finpass
 ENV POSTGRES_DB=finsecure
 
-# Copiar los scripts de inicialización
-COPY ./init /docker-entrypoint-initdb.d/
+# Copiar scripts SQL de inicialización
+COPY ./init /docker-entrypoint-initdb.d
 
+# Exponer el puerto estándar de PostgreSQL
 EXPOSE 5432

@@ -1,0 +1,83 @@
+version: "3.9"
+
+services:
+  # 🗄️ Módulo de base de datos PostgreSQL
+  db:
+    build:
+      context: ./datos
+      dockerfile: Dockerfile
+    container_name: db
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-finuser}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-finpass}
+      POSTGRES_DB: ${POSTGRES_DB:-finsecure}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./datos/init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-finuser} -d ${POSTGRES_DB:-finsecure}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - finnet
+
+  # ⚙️ Backend (FastAPI + SQLAlchemy + PostgreSQL)
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-finuser}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-finpass}
+      POSTGRES_DB: ${POSTGRES_DB:-finsecure}
+      POSTGRES_HOST: db
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - finnet
+
+  # 💻 Frontend (Angular + Nginx)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    restart: always
+    ports:
+      - "8081:80"
+    depends_on:
+      backend:
+        condition: service_started
+    networks:
+      - finnet
+
+  # 🌐 Sitio web público (React/Vite + Nginx)
+  site:
+    build:
+      context: ./sitioweb
+      dockerfile: Dockerfile
+    container_name: site
+    restart: always
+    ports:
+      - "8080:80"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - finnet
+
+networks:
+  finnet:
+
+volumes:
+  db_data:
+
