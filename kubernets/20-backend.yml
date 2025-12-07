@@ -35,6 +35,6 @@ spec:
   ports:
     - port: 8000
       targetPort: 8000
-      nodePort: 30082    # NUEVO: puerto externo
-  type: NodePort          # ANTES era ClusterIP
+      nodePort: 30082   
+  type: NodePort          
 
